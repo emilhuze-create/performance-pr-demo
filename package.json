@@ -1,0 +1,9 @@
+{
+  "name": "performance-pr-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A tiny performance-focused utility library used to demonstrate a highest-impact, lowest-effort optimization.",
+  "scripts": {
+    "test": "node --test"
+  }
+}
