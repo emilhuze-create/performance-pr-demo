@@ -2,11 +2,21 @@ function normalizeEmail(email) {
   return typeof email === 'string' ? email.trim().toLowerCase() : '';
 }
 
-function collectUniqueUsers(users, excludedUsers = []) {
-  const excludedEmails = new Set(
-    excludedUsers.map(user => normalizeEmail(user && user.email))
-  );
+function buildEmailIndex(users) {
+  const emailIndex = new Set();
 
+  for (const user of users) {
+    const email = normalizeEmail(user && user.email);
+    if (email) {
+      emailIndex.add(email);
+    }
+  }
+
+  return emailIndex;
+}
+
+function collectUniqueUsers(users, excludedUsers = []) {
+  const excludedEmails = buildEmailIndex(excludedUsers);
   const seen = new Set();
   const result = [];
 
@@ -24,4 +34,4 @@ function collectUniqueUsers(users, excludedUsers = []) {
   return result;
 }
 
-module.exports = { collectUniqueUsers, normalizeEmail };
+module.exports = { buildEmailIndex, collectUniqueUsers, normalizeEmail };

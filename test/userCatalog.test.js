@@ -1,6 +1,19 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { collectUniqueUsers } = require('../src/userCatalog.js');
+const { buildEmailIndex, collectUniqueUsers } = require('../src/userCatalog.js');
+
+test('buildEmailIndex lowers and normalizes every email once', () => {
+  const users = [
+    { email: 'Alice@example.com' },
+    { email: 'alice@example.com' },
+    { email: '  bob@example.com ' },
+  ];
+
+  assert.deepEqual([...buildEmailIndex(users)], [
+    'alice@example.com',
+    'bob@example.com',
+  ]);
+});
 
 test('keeps only unique users and ignores excluded emails', () => {
   const users = [

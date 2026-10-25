@@ -15,4 +15,4 @@ This project demonstrates a practical performance optimization in a small utilit
 10. Reduce network calls by combining requests or using HTTP caching.
 
 ## Selected PR improvement
-The highest-impact, lowest-effort improvement here is using a `Set` for exclusion lookups and duplicate detection. That reduces repeated O(n * m) scans to O(n + m) work.
+The highest-impact, lowest-effort improvement here is using a `Set`-backed email index for exclusion checks and duplicate detection. The code builds the exclusion index once, then walks the source list once, reducing repeated O(n * m) scans to O(n + m) work.
