@@ -17,17 +17,16 @@ function buildEmailIndex(users) {
 
 function collectUniqueUsers(users, excludedUsers = []) {
   const excludedEmails = buildEmailIndex(excludedUsers);
-  const seen = new Set();
   const result = [];
 
   for (const user of users) {
     const email = normalizeEmail(user && user.email);
 
-    if (!email || seen.has(email) || excludedEmails.has(email)) {
+    if (!email || excludedEmails.has(email)) {
       continue;
     }
 
-    seen.add(email);
+    excludedEmails.add(email);
     result.push(user);
   }
 
